@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Correzione Verifica - Funzioni</title>
+    
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #f4f7f6;
+            color: #333;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+        }
+        
+        /* --- Stili per le Schede (Tabs) --- */
+        .tab-nav {
+            display: flex;
+            background-color: #0056b3; /* Blu istituzionale */
+        }
+        .tab-button {
+            padding: 15px 25px;
+            cursor: pointer;
+            background-color: #0056b3;
+            color: white;
+            border: none;
+            font-size: 1.1em;
+            font-weight: bold;
+            opacity: 0.7;
+            transition: opacity 0.3s, background-color 0.3s;
+        }
+        .tab-button:hover {
+            background-color: #006cdd;
+            opacity: 1;
+        }
+        .tab-button.active {
+            opacity: 1;
+            background-color: #ffffff;
+            color: #0056b3;
+            border-bottom: 3px solid #0056b3;
+        }
+        
+        /* --- Contenuto delle Schede --- */
+        .tab-content {
+            display: none;
+            padding: 25px;
+            animation: fadeIn 0.5s;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* --- Stili per gli Esercizi --- */
+        .exercise {
+            background: #fff;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            padding: 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.03);
+        }
+        .exercise h3 {
+            color: #0056b3;
+            border-bottom: 2px solid #f0f0f0;
+            padding-bottom: 10px;
+            margin-top: 0;
+        }
+        .exercise h4 {
+            color: #333;
+            margin-top: 15px;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        /* --- Stili per le Soluzioni a Scomparsa --- */
+        details {
+            margin-top: 15px;
+            border-radius: 5px;
+            background: #fdfdfd;
+        }
+        summary {
+            cursor: pointer;
+            padding: 12px 15px;
+            background: #e9f5ff; /* Azzurrino chiaro */
+            color: #004a99;
+            font-weight: bold;
+            border-radius: 5px;
+            transition: background-color 0.2s;
+            list-style-type: '🧠'; /* Emoji cervello */
+            padding-left: 35px;
+        }
+        details[open] summary {
+            background: #d4eaff;
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+        }
+        summary:hover {
+            background-color: #d4eaff;
+        }
+        .solution {
+            padding: 20px;
+            background: #f9f9f9;
+            border: 1px solid #e0e0e0;
+            border-top: none;
+            border-bottom-left-radius: 5px;
+            border-bottom-right-radius: 5px;
+        }
+        .solution p {
+            margin-top: 0;
+        }
+        .solution .step {
+            margin-bottom: 15px;
+        }
+        .solution .step-title {
+            font-weight: bold;
+            color: #0056b3;
+            display: block;
+            margin-bottom: 5px;
+        }
+        
+        /* Stili per le immagini */
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-top: 10px;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header class="tab-nav">
+            <button class="tab-button active" onclick="openTab(event, 'fila1')">📝 Fila 1</button>
+            <button class="tab-button" onclick="openTab(event, 'fila2')">📚 Fila 2</button>
+        </header>
+
+        <div id="fila1" class="tab-content active">
+            
+            <div class="exercise">
+                <h3>Esercizio 1: Dominio di Funzioni</h3>
+                <p>Determina il dominio delle seguenti funzioni:</p>
+                <h4>a. \( y=\frac{2x+1}{x^{3}+5x^{2}-14x} \)</h4>
+                <details>
+                    <summary>Mostra Soluzione (a)</summary>
+                    <div class="solution">
+                        <div class="step">
+                            <span class="step-title">Condizione di Esistenza:</span>
+                            Questa è una funzione fratta. L'unica condizione da imporre è che il <strong>denominatore sia diverso da zero</strong>.
+                            $$ x^{3}+5x^{2}-14x \neq 0 $$
+                        </div>
+                        <div class="step">
+                            <span class="step-title">Risoluzione:</span>
+                            Scomponiamo il polinomio al denominatore raccogliendo la \(x\):
+                            $$ x(x^{2}+5x-14) \neq 0 $$
+                            Ora troviamo le radici dell'equazione di secondo grado \(x^{2}+5x-14 = 0\) usando la formula quadratica \( x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a} \):
+                            $$ x = \frac{-5 \pm \sqrt{5^2 - 4(1)(-14)}}{2(1)} = \frac{-5 \pm \sqrt{25 + 56}}{2} = \frac{-5 \pm \sqrt{81}}{2} = \frac{-5 \pm 9}{2} $$
+                            Le due soluzioni sono:
+                            <ul>
+                                <li>\( x_1 = \frac{-5 + 9}{2} = \frac{4}{2} = 2 \)</li>
+                                <li>\( x_2 = \frac{-5 - 9}{2} = \frac{-14}{2} = -7 \)</li>
+                            </ul>
+                            Quindi, il denominatore si scompone come \( x(x-2)(x+7) \).
+                        </div>
+                         <div class="step">
+                            <span class="step-title">Conclusione:</span>
+                            Le condizioni di esistenza sono \( x \neq 0 \), \( x \neq 2 \) e \( x \neq -7 \).
+                            <br>
+                            <strong>Dominio (D):</strong> \( D: \mathbb{R} \setminus \{-7, 0, 2\} \), che si può scrivere anche come:
+                            $$ D: (-\infty, -7) \cup (-7, 0) \cup (0, 2) \cup (2, +\infty) $$
+                        </div>
+                    </div>
+                </details>
+
+                <h4>b. \( y=\sqrt{\frac{x+2}{x-1}} \)</h4>
+                <details>
+                    <summary>Mostra Soluzione (b)</summary>
+                    <div class="solution">
+                        <div class="step">
+                            <span class="step-title">Condizione di Esistenza:</span>
+                            Questa è una funzione irrazionale con indice pari. La condizione da imporre è che l'<strong>argomento (radicando) sia maggiore o uguale a zero</strong>.
+                            $$ \frac{x+2}{x-1} \geq 0 $$
+                        </div>
+                        <div class="step">
+                            <span class="step-title">Studio del Segno:</span>
+                            Risolviamo la disequazione studiando il segno del numeratore e del denominatore.
+                            <ul>
+                                <li><strong>Numeratore (N):</strong> \( x+2 \geq 0 \implies x \geq -2 \)</li>
+                                <li><strong>Denominatore (D):</strong> \( x-1 > 0 \implies x > 1 \) (Il denominatore deve essere strettamente maggiore di zero, non può annullarsi).</li>
+                            </ul>
+                            Creiamo la tabella dei segni:
+<pre>
+             -2         1
+N (x+2)   - - - - 0 + + + + + +
+D (x-1)   - - - - | - - - 0 + + +
+Frazione  + + + + 0 - - - N.E. + + +
+</pre>
+                            La frazione è positiva ( \(\geq 0\) ) dove i segni sono concordi.
+                        </div>
+                         <div class="step">
+                            <span class="step-title">Conclusione:</span>
+                            La disequazione è verificata per \( x \leq -2 \) oppure \( x > 1 \).
+                            <br>
+                            <strong>Dominio (D):</strong>
+                            $$ D: (-\infty, -2] \cup (1, +\infty) $$
+                        </div>
+                    </div>
+                </details>
+
+                <h4>c. \( y=\frac{x+1}{x^{2}ln(2x-1)} \)</h4>
+                <details>
+                    <summary>Mostra Soluzione (c)</summary>
+                    <div class="solution">
+                        <div class="step">
+                            <span class="step-title">Condizioni di Esistenza:</span>
+                            Qui abbiamo due problemi: un denominatore e un logaritmo. Dobbiamo impostare un sistema di condizioni:
+                            <ol>
+                                <li><strong>Argomento del logaritmo:</strong> L'argomento deve essere strettamente positivo.
+                                    $$ 2x-1 > 0 \implies 2x > 1 \implies x > \frac{1}{2} $$
+                                </li>
+                                <li><strong>Denominatore:</strong> L'intero denominatore deve essere diverso da zero.
+                                    $$ x^{2} \cdot ln(2x-1) \neq 0 $$
+                                    Questo si divide in due sotto-condizioni (legge di annullamento del prodotto):
+                                    <ul>
+                                        <li>\( x^2 \neq 0 \implies x \neq 0 \)</li>
+                                        <li>\( ln(2x-1) \neq 0 \implies 2x-1 \neq 1 \implies 2x \neq 2 \implies x \neq 1 \)</li>
+                                    </ul>
+                                </li>
+                            </ol>
+                        </div>
+                        <div class="step">
+                            <span class="step-title">Intersezione delle Condizioni:</span>
+                            Mettiamo insieme tutte le condizioni trovate:
+                            <ul>
+                                <li>\( x > \frac{1}{2} \)</li>
+                                <li>\( x \neq 0 \)</li>
+                                <li>\( x \neq 1 \)</li>
+                            </ul>
+                            La condizione \( x \neq 0 \) è già inclusa in \( x > \frac{1}{2} \), quindi possiamo ignorarla.
+                            Restano \( x > \frac{1}{2} \) e \( x \neq 1 \).
+                        </div>
+                         <div class="step">
+                            <span class="step-title">Conclusione:</span>
+                            <strong>Dominio (D):</strong>
+                            $$ D: \left(\frac{1}{2}, 1\right) \cup (1, +\infty) $$
+                        </div>
+                    </div>
+                </details>
+            </div>
+            
+            <div class="exercise">
+                <h3>Esercizio 2: Studio di Funzione</h3>
+                <p>Determina dominio, zeri e segno della funzione \( y=\frac{x^{3}}{x^{2}-4} \). Indica se la funzione è pari, dispari o né pari né dispari.</p>
+                <details>
+                    <summary>Mostra Soluzione</summary>
+                    <div class="solution">
+                        <div class="step">
+                            <span class="step-title">1. Dominio</span>
+                            Il denominatore deve essere diverso da zero:
+                            $$ x^2 - 4 \neq 0 \implies (x-2)(x+2) \neq 0 \implies x \neq 2 \text{ e } x \neq -2 $$
+                            <strong>Dominio (D):</strong> \( D: (-\infty, -2) \cup (-2, 2) \cup (2, +\infty) \)
+                        </div>
+                        <div class="step">
+                            <span class="step-title">2. Zeri (Intersezioni con asse x)</span>
+                            Pongo \( y = 0 \), che equivale a porre il numeratore uguale a zero:
+                            $$ x^3 = 0 \implies x = 0 $$
+                            La funzione ha un unico zero nel punto \( (0, 0) \).
+                        </div>
+                        <div class="step">
+                            <span class="step-title">3. Segno (Positività)</span>
+                            Pongo \( y > 0 \):
+                            $$ \frac{x^3}{x^2 - 4} > 0 $$
+                            Studio i segni di numeratore e denominatore:
+                            <ul>
+                                <li><strong>Numeratore (N):</strong> \( x^3 > 0 \implies x > 0 \)</li>
+                                <li><strong>Denominatore (D):</strong> \( x^2 - 4 > 0 \implies x < -2 \lor x > 2 \) (parabola con concavità verso l'alto)</li>
+                            </ul>
+                            Tabella dei segni:
+<pre>
+             -2         0         2
+N (x^3)   - - - - | - - - 0 + + + + | + + +
+D (x^2-4) + + + + 0 - - - | - - - 0 + + +
+Funzione  - - - N.E. + + + 0 - - - N.E. + + +
+</pre>
+                            <ul>
+                                <li><strong>Positiva \(f(x) > 0\):</strong> \( (-2, 0) \cup (2, +\infty) \)</li>
+                                <li><strong>Negativa \(f(x) < 0\):</strong> \( (-\infty, -2) \cup (0, 2) \)</li>
+                            </ul>
+                        </div>
+                        <div class="step">
+                            <span class="step-title">4. Funzione Pari o Dispari</span>
+                            Verifico la simmetria calcolando \( f(-x) \):
+                            $$ f(-x) = \frac{(-x)^3}{(-x)^2 - 4} = \frac{-x^3}{x^2 - 4} $$
+                            Confrontiamo \( f(-x) \) con \( f(x) \):
+                            $$ f(-x) = - \left( \frac{x^3}{x^2 - 4} \right) = -f(x) $$
+                            Poiché \( f(-x) = -f(x) \), la funzione è <strong>dispari</strong> (simmetrica rispetto all'origine).
+                        </div>
+                    </div>
+                </details>
+            </div>
+
+            <div class="exercise">
+                <h3>Esercizio 3: Funzioni Composte e Inverse</h3>
+                <p>Date le funzioni \(f(x)=ln~x\) e \(g(x)=2x+1\), determina \(h(x)=g\circ f\), \(p(x)=f\circ g\) e le rispettive funzioni inverse \(h^{-1}(x)\) e \(p^{-1}(x)\).</p>
+                <details>
+                    <summary>Mostra Soluzione</summary>
+                    <div class="solution">
+                        <div class="step">
+                            <span class="step-title">1. Funzione Composta h(x)</span>
+                            $$ h(x) = g \circ f = g(f(x)) $$
+                            Sostituiamo \( f(x) \) dentro \( g(x) \):
+                            $$ h(x) = g(ln~x) = 2(ln~x) + 1 $$
+                            <strong>\( h(x) = 2ln~x + 1 \)</strong>
+                        </div>
+                        <div class="step">
+                            <span class="step-title">2. Funzione Composta p(x)</span>
+                            $$ p(x) = f \circ g = f(g(x)) $$
+                            Sostituiamo \( g(x) \) dentro \( f(x) \):
+                            $$ p(x) = f(2x+1) = ln(2x+1) $$
+                            <strong>\( p(x) = ln(2x+1) \)</strong>
+                        </div>
+                        <div class="step">
+                            <span class="step-title">3. Inversa di h(x)</span>
+                            Partiamo da \( y = 2ln~x + 1 \) e isoliamo la \( x \):
+                            $$ y - 1 = 2ln~x $$
+                            $$ \frac{y-1}{2} = ln~x $$
+                            Applichiamo l'esponenziale a entrambi i membri per eliminare il logaritmo:
+                            $$ x = e^{\frac{y-1}{2}} $$
+                            Scambiamo \(x\) e \(y\) per ottenere la funzione inversa:
+                            <strong>\( h^{-1}(x) = e^{\frac{x-1}{2}} \)</strong>
+                        </div>
+                        <div class="step">
+                            <span class="step-title">4. Inversa di p(x)</span>
+                            Partiamo da \( y = ln(2x+1) \) e isoliamo la \( x \):
+                            $$ e^y = 2x+1 $$
+                            $$ e^y - 1 = 2x $$
+                            $$ x = \frac{e^y - 1}{2} $$
+                            Scambiamo \(x\) e \(y\):
+                            <strong>\( p^{-1}(x) = \frac{e^x - 1}{2} \)</strong>
+                        </div>
+                    </div>
+                </details>
+            </div>
+
+            <div class="exercise">
+                <h3>Esercizio 4: Analisi del Grafico</h3>
+                <p>Considera la funzione \(f(x)\) della figura.</p>
+                
+                <img src="data:image/png;base64,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" alt="Grafico della funzione f(x) per la Fila 1">
+                
+                <p>a. Determina il dominio, l'immagine, il segno e gli zeri.</p>
+                <p>b. Indica in quali intervalli la funzione è monotona crescente o decrescente.</p>
+                <p>c. Indica se è una funzione pari, dispari o né pari né dispari, motivando la risposta.</p>
+                
+                <details>
+                    <summary>Mostra Soluzione</summary>
+                    <div class="solution">
+                        <div class="step">
+                            <span class="step-title">a. Dominio, Immagine, Zeri e Segno</span>
+                            <ul>
+                                <li><strong>Dominio (D):</strong> Il grafico è definito per tutti i valori di \(x\) compresi tra -1 e 1 (inclusi).
+                                    <br><strong>\( D: [-1, 1] \)</strong>
+                                </li>
+                                <li><strong>Immagine (I) o Codominio:</strong> I valori \(y\) assunti dalla funzione vanno dal minimo -3 al massimo 3.
+                                    <br><strong>\( I: [-3, 3] \)</strong>
+                                </li>
+                                <li><strong>Zeri:</strong> I punti in cui il grafico interseca l'asse \(x\) (\(y=0\)).
+                                    <br><strong>\( x = -1, x = 0, x = 1 \)</strong>
+                                </li>
+                                <li><strong>Segno:</strong>
+                                    <ul>
+                                        <li><strong>Positiva (\(f(x) > 0\)):</strong> Dove il grafico è sopra l'asse \(x\).
+                                            <br><strong>\( (-1, 0) \)</strong>
+                                        </li>
+                                        <li><strong>Negativa (\(f(x) < 0\)):</strong> Dove il grafico è sotto l'asse \(x\).
+                                            <br><strong>\( (0, 1) \)</strong>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="step">
+                            <span class="step-title">b. Monotonia</span>
+                            <ul>
+                                <li><strong>Crescente:</strong> Dove il grafico "sale" da sinistra a destra.
+                                    <br><strong>\( [-1, -0.5] \)</strong> e <strong>\( [0.5, 1] \)</strong>
+                                </li>
+                                <li><strong>Decrescente:</strong> Dove il grafico "scende" da sinistra a destra.
+                                    <br><strong>\( [-0.5, 0.5] \)</strong>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="step">
+                            <span class="step-title">c. Simmetria (Pari/Dispari)</span>
+                            <p>La funzione è <strong>dispari</strong>.</p>
+                            <p><strong>Motivazione:</strong> Il grafico è simmetrico rispetto all'origine degli assi (O). Se prendiamo un punto \( (x, y) \) sul grafico, anche il punto \( (-x, -y) \) appartiene al grafico. Ad esempio, il punto \( (0.5, -3) \) è sul grafico, e così è il suo simmetrico rispetto all'origine \( (-0.5, 3) \). Matematicamente, \( f(-x) = -f(x) \).</p>
+                        </div>
+                    </div>
+                </details>
+            </div>
+
+        </div>
+
+        <div id="fila2" class="tab-content">
+
+            <div class="exercise">
+                <h3>Esercizio 1: Dominio di Funzioni</h3>
+                <p>Determina il dominio delle seguenti funzioni:</p>
+                <h4>a. \( y=\sqrt{\frac{x-1}{x+2}} \)</h4>
+                <details>
+                    <summary>Mostra Soluzione (a)</summary>
+                    <div class="solution">
+                        <div class="step">
+                            <span class="step-title">Condizione di Esistenza:</span>
+                            Questa è una funzione irrazionale con indice pari. La condizione da imporre è che l'<strong>argomento (radicando) sia maggiore o uguale a zero</strong>.
+                            $$ \frac{x-1}{x+2} \geq 0 $$
+                        </div>
+                        <div class="step">
+                            <span class="step-title">Studio del Segno:</span>
+                            Risolviamo la disequazione studiando il segno del numeratore e del denominatore.
+                            <ul>
+                                <li><strong>Numeratore (N):</strong> \( x-1 \geq 0 \implies x \geq 1 \)</li>
+                                <li><strong>Denominatore (D):</strong> \( x+2 > 0 \implies x > -2 \) (Il denominatore deve essere strettamente maggiore di zero, non può annullarsi).</li>
+                            </ul>
+                            Creiamo la tabella dei segni:
+<pre>
+             -2         1
+N (x-1)   - - - - | - - - 0 + + +
+D (x+2)   - - - - 0 + + + | + + +
+Frazione  + + + N.E. - - - 0 + + +
+</pre>
+                            La frazione è positiva ( \(\geq 0\) ) dove i segni sono concordi.
+                        </div>
+                         <div class="step">
+                            <span class="step-title">Conclusione:</span>
+                            La disequazione è verificata per \( x < -2 \) oppure \( x \geq 1 \).
+                            <br>
+                            <strong>Dominio (D):</strong>
+                            $$ D: (-\infty, -2) \cup [1, +\infty) $$
+                        </div>
+                    </div>
+                </details>
+
+                <h4>b. \( y=\frac{2x+2}{x^{2}log(3x-2)} \)</h4>
+                <details>
+                    <summary>Mostra Soluzione (b)</summary>
+                    <div class="solution">
+                        <div class="step">
+                            <span class="step-title">Condizioni di Esistenza:</span>
+                            Qui abbiamo due problemi: un denominatore e un logaritmo (con base \(e\), 'ln' è stato interpretato come 'log' generico, ma la procedura è identica). Dobbiamo impostare un sistema di condizioni:
+                            <ol>
+                                <li><strong>Argomento del logaritmo:</strong> L'argomento deve essere strettamente positivo.
+                                    $$ 3x-2 > 0 \implies 3x > 2 \implies x > \frac{2}{3} $$
+                                </li>
+                                <li><strong>Denominatore:</strong> L'intero denominatore deve essere diverso da zero.
+                                    $$ x^{2} \cdot log(3x-2) \neq 0 $$
+                                    Questo si divide in due sotto-condizioni:
+                                    <ul>
+                                        <li>\( x^2 \neq 0 \implies x \neq 0 \)</li>
+                                        <li>\( log(3x-2) \neq 0 \implies 3x-2 \neq 1 \implies 3x \neq 3 \implies x \neq 1 \)</li>
+                                    </ul>
+                                </li>
+                            </ol>
+                        </div>
+                        <div class="step">
+                            <span class="step-title">Intersezione delle Condizioni:</span>
+                            Mettiamo insieme tutte le condizioni trovate:
+                            <ul>
+                                <li>\( x > \frac{2}{3} \)</li>
+                                <li>\( x \neq 0 \)</li>
+                                <li>\( x \neq 1 \)</li>
+                            </ul>
+                            La condizione \( x \neq 0 \) è già inclusa in \( x > \frac{2}{3} \).
+                            Restano \( x > \frac{2}{3} \) e \( x \neq 1 \).
+                        </div>
+                         <div class="step">
+                            <span class="step-title">Conclusione:</span>
+                            <strong>Dominio (D):</strong>
+                            $$ D: \left(\frac{2}{3}, 1\right) \cup (1, +\infty) $$
+                        </div>
+                    </div>
+                </details>
+                
+                <h4>c. \( y=\frac{2x+1}{x^{3}+5x^{2}-24x} \)</h4>
+                <details>
+                    <summary>Mostra Soluzione (c)</summary>
+                    <div class="solution">
+                        <div class="step">
+                            <span class="step-title">Condizione di Esistenza:</span>
+                            Questa è una funzione fratta. Il <strong>denominatore deve essere diverso da zero</strong>.
+                            $$ x^{3}+5x^{2}-24x \neq 0 $$
+                        </div>
+                        <div class="step">
+                            <span class="step-title">Risoluzione:</span>
+                            Scomponiamo il polinomio raccogliendo la \(x\):
+                            $$ x(x^{2}+5x-24) \neq 0 $$
+                            Ora troviamo le radici dell'equazione \(x^{2}+5x-24 = 0\) (prodotto -24, somma +5): i numeri sono +8 e -3.
+                            $$ (x+8)(x-3) = 0 $$
+                            Le due soluzioni sono \( x_1 = -8 \) e \( x_2 = 3 \).
+                            Quindi, il denominatore si scompone come \( x(x+8)(x-3) \).
+                        </div>
+                         <div class="step">
+                            <span class="step-title">Conclusione:</span>
+                            Le condizioni di esistenza sono \( x \neq 0 \), \( x \neq -8 \) e \( x \neq 3 \).
+                            <br>
+                            <strong>Dominio (D):</strong> \( D: \mathbb{R} \setminus \{-8, 0, 3\} \), che si può scrivere anche come:
+                            $$ D: (-\infty, -8) \cup (-8, 0) \cup (0, 3) \cup (3, +\infty) $$
+                        </div>
+                    </div>
+                </details>
+            </div>
+            
+            <div class="exercise">
+                <h3>Esercizio 2: Studio di Funzione</h3>
+                <p>Determina dominio, zeri e segno della funzione \( y=\frac{x^{3}}{x^{2}-9} \). Indica se la funzione è pari, dispari o né pari né dispari.</p>
+                <details>
+                    <summary>Mostra Soluzione</summary>
+                    <div class="solution">
+                        <div class="step">
+                            <span class="step-title">1. Dominio</span>
+                            Il denominatore deve essere diverso da zero:
+                            $$ x^2 - 9 \neq 0 \implies (x-3)(x+3) \neq 0 \implies x \neq 3 \text{ e } x \neq -3 $$
+                            <strong>Dominio (D):</strong> \( D: (-\infty, -3) \cup (-3, 3) \cup (3, +\infty) \)
+                        </div>
+                        <div class="step">
+                            <span class="step-title">2. Zeri (Intersezioni con asse x)</span>
+                            Pongo \( y = 0 \), che equivale a porre il numeratore uguale a zero:
+                            $$ x^3 = 0 \implies x = 0 $$
+                            La funzione ha un unico zero nel punto \( (0, 0) \).
+                        </div>
+                        <div class="step">
+                            <span class="step-title">3. Segno (Positività)</span>
+                            Pongo \( y > 0 \):
+                            $$ \frac{x^3}{x^2 - 9} > 0 $$
+                            Studio i segni di numeratore e denominatore:
+                            <ul>
+                                <li><strong>Numeratore (N):</strong> \( x^3 > 0 \implies x > 0 \)</li>
+                                <li><strong>Denominatore (D):</strong> \( x^2 - 9 > 0 \implies x < -3 \lor x > 3 \)</li>
+                            </ul>
+                            Tabella dei segni:
+<pre>
+             -3         0         3
+N (x^3)   - - - - | - - - 0 + + + + | + + +
+D (x^2-9) + + + + 0 - - - | - - - 0 + + +
+Funzione  - - - N.E. + + + 0 - - - N.E. + + +
+</pre>
+                            <ul>
+                                <li><strong>Positiva \(f(x) > 0\):</strong> \( (-3, 0) \cup (3, +\infty) \)</li>
+                                <li><strong>Negativa \(f(x) < 0\):</strong> \( (-\infty, -3) \cup (0, 3) \)</li>
+                            </ul>
+                        </div>
+                        <div class="step">
+                            <span class="step-title">4. Funzione Pari o Dispari</span>
+                            Verifico la simmetria calcolando \( f(-x) \):
+                            $$ f(-x) = \frac{(-x)^3}{(-x)^2 - 9} = \frac{-x^3}{x^2 - 9} $$
+                            Confrontiamo \( f(-x) \) con \( f(x) \):
+                            $$ f(-x) = - \left( \frac{x^3}{x^2 - 9} \right) = -f(x) $$
+                            Poiché \( f(-x) = -f(x) \), la funzione è <strong>dispari</strong> (simmetrica rispetto all'origine).
+                        </div>
+                    </div>
+                </details>
+            </div>
+
+            <div class="exercise">
+                <h3>Esercizio 3: Funzioni Composte e Inverse</h3>
+                <p>Date le funzioni \(f(x)=2x+1\) e \(g(x)=ln~x\), determina \(h(x)=g\circ f\), \(p(x)=f\circ g\) e le rispettive funzioni inverse \(h^{-1}(x)\) e \(p^{-1}(x)\).</p>
+                <details>
+                    <summary>Mostra Soluzione</summary>
+                    <div class="solution">
+                        <div class="step">
+                            <span class="step-title">1. Funzione Composta h(x)</span>
+                            $$ h(x) = g \circ f = g(f(x)) $$
+                            Sostituiamo \( f(x) \) dentro \( g(x) \):
+                            $$ h(x) = g(2x+1) = ln(2x+1) $$
+                            <strong>\( h(x) = ln(2x+1) \)</strong>
+                        </div>
+                        <div class="step">
+                            <span class="step-title">2. Funzione Composta p(x)</span>
+                            $$ p(x) = f \circ g = f(g(x)) $$
+                            Sostituiamo \( g(x) \) dentro \( f(x) \):
+                            $$ p(x) = f(ln~x) = 2(ln~x) + 1 $$
+                            <strong>\( p(x) = 2ln~x + 1 \)</strong>
+                        </div>
+                        <div class="step">
+                            <span class="step-title">3. Inversa di h(x)</span>
+                            Partiamo da \( y = ln(2x+1) \) e isoliamo la \( x \):
+                            $$ e^y = 2x+1 $$
+                            $$ e^y - 1 = 2x $$
+                            $$ x = \frac{e^y - 1}{2} $$
+                            Scambiamo \(x\) e \(y\):
+                            <strong>\( h^{-1}(x) = \frac{e^x - 1}{2} \)</strong>
+                        </div>
+                        <div class="step">
+                            <span class="step-title">4. Inversa di p(x)</span>
+                            Partiamo da \( y = 2ln~x + 1 \) e isoliamo la \( x \):
+                            $$ y - 1 = 2ln~x $$
+                            $$ \frac{y-1}{2} = ln~x $$
+                            $$ x = e^{\frac{y-1}{2}} $$
+                            Scambiamo \(x\) e \(y\):
+                            <strong>\( p^{-1}(x) = e^{\frac{x-1}{2}} \)</strong>
+                        </div>
+                    </div>
+                </details>
+            </div>
+
+            <div class="exercise">
+                <h3>Esercizio 4: Analisi del Grafico</h3>
+                <p>Considera la funzione \(f(x)\) della figura.</p>
+                
+                <img src="data:image/png;base64,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" alt="Grafico della funzione f(x) per la Fila 2">
+
+                <p>a. Determina il dominio, l'immagine, il segno e gli zeri.</p>
+                <p>b. Indica in quali intervalli la funzione è monotona crescente o decrescente.</p>
+                <p>c. Indica se è una funzione pari, dispari o né pari né dispari, motivando la risposta.</p>
+                
+                <details>
+                    <summary>Mostra Soluzione</summary>
+                    <div class="solution">
+                        <div class="step">
+                            <span class="step-title">a. Dominio, Immagine, Zeri e Segno</span>
+                            <ul>
+                                <li><strong>Dominio (D):</strong> Il grafico è definito per tutti i valori di \(x\) tranne dove ci sono gli asintoti verticali in \(x=-2\) e \(x=2\).
+                                    <br><strong>\( D: (-\infty, -2) \cup (-2, 2) \cup (2, +\infty) \)</strong>
+                                </li>
+                                <li><strong>Immagine (I) o Codominio:</strong> I valori \(y\) assunti dalla funzione partono da \(-\infty\) e arrivano a \(0\) (incluso), poi ripartono da \(2\) (escluso) fino a \(+\infty\).
+                                    <br><strong>\( I: (-\infty, 0] \cup (2, +\infty) \)</strong>
+                                </li>
+                                <li><strong>Zeri:</strong> Il grafico interseca l'asse \(x\) solo nell'origine.
+                                    <br><strong>\( x = 0 \)</strong>
+                                </li>
+                                <li><strong>Segno:</strong>
+                                    <ul>
+                                        <li><strong>Positiva (\(f(x) > 0\)):</strong> Dove il grafico è sopra l'asse \(x\).
+                                            <br><strong>\( (-\infty, -2) \cup (2, +\infty) \)</strong>
+                                        </li>
+                                        <li><strong>Negativa (\(f(x) < 0\)):</strong> Dove il grafico è sotto l'asse \(x\).
+                                            <br><strong>\( (-2, 2) \)</strong>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="step">
+                            <span class="step-title">b. Monotonia</span>
+                            <ul>
+                                <li><strong>Crescente:</strong> Dove il grafico "sale" da sinistra a destra.
+                                    <br><strong>\( (-\infty, -2) \)</strong> e <strong>\( (-2, 0] \)</strong>
+                                </li>
+                                <li><strong>Decrescente:</strong> Dove il grafico "scende" da sinistra a destra.
+                                    <br><strong>\( [0, 2) \)</strong> e <strong>\( (2, +\infty) \)</strong>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="step">
+                            <span class="step-title">c. Simmetria (Pari/Dispari)</span>
+                            <p>La funzione è <strong>pari</strong>.</p>
+                            <p><strong>Motivazione:</strong> Il grafico è simmetrico rispetto all'asse \(y\). Se prendiamo un punto \( (x, y) \) sul grafico, anche il punto \( (-x, y) \) appartiene al grafico. Ad esempio, il grafico passa per \((0, 0)\) che è sull'asse, e la parte a destra (\(x > 0\)) è l'immagine speculare della parte a sinistra (\(x < 0\)). Matematicamente, \( f(-x) = f(x) \).</p>
+                        </div>
+                    </div>
+                </details>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        function openTab(evt, tabName) {
+            var i, tabcontent, tablinks;
+            
+            // Nascondi tutto il contenuto delle schede
+            tabcontent = document.getElementsByClassName("tab-content");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+            
+            // Rimuovi la classe 'active' da tutti i bottoni
+            tablinks = document.getElementsByClassName("tab-button");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+            
+            // Mostra la scheda corrente e aggiungi la classe 'active' al bottone
+            document.getElementById(tabName).style.display = "block";
+            evt.currentTarget.className += " active";
+        }
+    </script>
+
+</body>
+</html>
